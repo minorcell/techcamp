@@ -1,8 +1,3 @@
-node_modules/
-dist/
-.astro/
-.env
-.DS_Store
 # Dependencies
 /node_modules
 
