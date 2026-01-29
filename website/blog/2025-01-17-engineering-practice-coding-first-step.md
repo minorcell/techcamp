@@ -1,5 +1,5 @@
 ---
-slug: /blog/2025/engineering-practice-coding-first-step
+slug: engineering-practice-coding-first-step
 title: "工程实践分享｜“写代码”不是第一步！"
 authors: [techcamp]
 tags: [ai, architecture, best-practices, compiler, engineering, go, llgo]

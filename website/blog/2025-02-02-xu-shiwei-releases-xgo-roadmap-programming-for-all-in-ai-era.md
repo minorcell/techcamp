@@ -1,5 +1,5 @@
 ---
-slug: /blog/2025/xu-shiwei-releases-xgo-roadmap-programming-for-all-in-ai-era
+slug: xu-shiwei-releases-xgo-roadmap-programming-for-all-in-ai-era
 title: "许式伟发布 XGo 全景图：AI 时代的全民编程语言"
 authors: [techcamp]
 tags: [ai, architecture, best-practices, career, compiler, engineering, go, llgo, python, xgo]

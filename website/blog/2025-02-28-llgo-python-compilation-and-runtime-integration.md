@@ -1,5 +1,5 @@
 ---
-slug: /blog/2025/llgo-python-compilation-and-runtime-integration
+slug: llgo-python-compilation-runtime-integration-dependency-to-delivery
 title: "LLGo 中 Python 编译与运行时集成：从依赖识别到一键交付"
 authors: [techcamp]
 tags: [architecture, compiler, engineering, go, llgo, python]

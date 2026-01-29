@@ -1,5 +1,5 @@
 ---
-slug: /blog/2025/type-system-understanding-xgo-compiler-implementation
+slug: type-system-understanding-xgo-compiler-implementation
 title: "从类型系统理解 XGo 编译器的实现"
 authors: [techcamp]
 tags: [ai, architecture, career, compiler, engineering, go, llgo, xgo]

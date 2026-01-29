@@ -1,5 +1,5 @@
 ---
-slug: /blog/2025/on-ai-era-engineer-development-perspective
+slug: on-ai-era-engineer-development-perspective
 title: "许式伟聊 AI 时代下的工程师发展观"
 authors: [techcamp]
 tags: [ai, architecture, best-practices, career, engineering, tutorial]
