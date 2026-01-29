@@ -1,8 +1,8 @@
 ---
-slug: 许式伟发布-xgo-全景图ai-时代的全民编程语言
+slug: /blog/2025/xu-shiwei-releases-xgo-roadmap-programming-for-all-in-ai-era
 title: "许式伟发布 XGo 全景图：AI 时代的全民编程语言"
 authors: [techcamp]
-tags: [ai, architecture, career, compiler, engineering, go, llgo, python, xgo]
+tags: [ai, architecture, best-practices, career, compiler, engineering, go, llgo, python, xgo]
 date: 2025-02-02
 description: "在第四届 1024 实训营开幕式上，七牛云创始人许式伟（https://github.com/xushiwei）分享了XGo的全景图。这次分享与以往有所不同，他不仅介绍了XGo的技术特性，更重要的是阐述了XGo背后的设计哲学和未来愿景。"
 ---
@@ -110,15 +110,12 @@ XGo 在 2020 年 5 月 23 日诞生第一行代码，当时还叫 Go+。2021 年
 
 XGo 对 C/C++的支持已经非常完备。可以用 XGo 的语法去优雅地引用 C/C++库，没有经过任何包装。XGo 和 C/C++之间互操作没有任何障碍。
 
-![](/img/blog/许式伟发布-xgo-全景图ai-时代的全民编程语言/c.png)
-
 XGo 甚至支持 C 字符串的内建支持，在双引号前面加一个 C 就代表这是一个 C 字符串 c"Hello"。这是 XGo 特有的，Go 没有的东西。它底层基于 LLGo 的指令，不会产生像 cgo 那样的开销。
 
 ### Python 生态支持
 
 XGo 对 Python 的支持也已经实现。Python 在 XGo 中和 Go 一样是一等公民，生态里的所有资产都会让它看起来跟 Go 的资产一样。
 
-![](/img/blog/许式伟发布-xgo-全景图ai-时代的全民编程语言/p.png)
 
 XGo 有内建的 Python 字符串，`py"hello"`就是一个 Python 字符串字面量。我们还在探索如何让 Python 的字面量和内建字符串有更好的协同性。
 
@@ -140,7 +137,6 @@ XGo 包含三个主要部分：
 
 LLGo 是一个 Go 编译器，它的使命是实现软件工程历史所有资产的融合。
 
-![](/img/blog/许式伟发布-xgo-全景图ai-时代的全民编程语言/l.png)
 
 LLGo 是二进制兼容 C 生态的资产，源代码兼容 Go 生态的资产。这样做的逻辑是：C 生态足够庞大，Go 生态相对较小。源代码兼容意味着有 bug，但给予足够多的时间总能修复完。
 
@@ -152,7 +148,6 @@ XGo 语言本身。
 
 XBuilder 是一个 IDE，特别像 Scratch，但跟 Scratch 又很不一样。XBuilder 是直接文本编程的，不是积木式编程。
 
-![](/img/blog/许式伟发布-xgo-全景图ai-时代的全民编程语言/x.png)
 
 许式伟提到，他曾经亲身带教过一些小朋友，在 CodeMonkey 里让几个完全没有编程基础、甚至没有接触过 Scratch 的小朋友直接做文本编程的尝试。让他很诧异的是，这些小朋友完全没有遇到任何障碍，文本编程的门槛其实并不比积木式编程高多少，两者几乎是等价的。这个发现让他意识到，让学生越早过渡到文本编程的方式越好，这也是为什么 XBuilder 最终决定放弃积木视图模式，直接采用文本编程的原因。
 

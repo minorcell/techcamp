@@ -1,15 +1,10 @@
 ---
 slug: /blog/2025/spx-algorithm-building-multimodal-search-service
-title: SPX-Algorithm：构建多模态搜索服务的一些心得
-authors:
-- techcamp
-tags:
-- ai
-- architecture
-- engineering
-- go
+title: "SPX-Algorithm：构建多模态搜索服务的一些心得"
+authors: [techcamp]
+tags: [ai, architecture, best-practices, engineering, go]
 date: 2025-02-16
-description: 也是快到结营阶段了，关于我在实训营期间负责的 SPX-Algorithm 这个项目模块的设计思路，想着写个分享记录一下这段时间的心得体会。这个项目说起来其实就是个图文搜索服务，但做下来发现里面还挺有意思的，尤其是在架构设计和工程实践方面踩了...
+description: "也是快到结营阶段了，关于我在实训营期间负责的 SPX-Algorithm 这个项目模块的设计思路，想着写个分享记录一下这段时间的心得体会。这个项目说起来其实就是个图文搜索服务，但做下来发现里面还挺有意思的，尤其是在架构设计和工程实践方面踩了不少坑，也有一些收获。"
 ---
 
 ## 写在前面

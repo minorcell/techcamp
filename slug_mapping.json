@@ -1,0 +1,304 @@
+[
+  {
+    "source": "2025/01. 工程实践分享 | 把小事做好/202504-builder-articles.md",
+    "destination": "website/blog/2025-01-15-engineering-practice-doing-small-things-well.md",
+    "original_title": "工程实践分享 | 把小事做好",
+    "english_slug": "engineering-practice-doing-small-things-well",
+    "date": "2025-01-15",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "career",
+      "compiler",
+      "engineering",
+      "go",
+      "tutorial"
+    ]
+  },
+  {
+    "source": "2025/02. 工程实践分享｜“写代码”不是第一步！/llkgstore-summary.md",
+    "destination": "website/blog/2025-01-17-engineering-practice-coding-first-step.md",
+    "original_title": "工程实践分享｜“写代码”不是第一步！",
+    "english_slug": "engineering-practice-coding-first-step",
+    "date": "2025-01-17",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "compiler",
+      "engineering",
+      "go",
+      "llgo"
+    ]
+  },
+  {
+    "source": "2025/03. 同学，为什么我建议你关注 1024 实训营？/whycamp.md",
+    "destination": "website/blog/2025-01-19-why-you-should-join-1024-techcamp.md",
+    "original_title": "同学，为什么我建议你关注 1024 实训营？",
+    "english_slug": "why-you-should-join-1024-techcamp",
+    "date": "2025-01-19",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "career",
+      "compiler",
+      "engineering",
+      "go",
+      "llgo",
+      "xgo"
+    ]
+  },
+  {
+    "source": "2025/04. 当 AI 能写代码，工程师的核心竞争力是什么？/ai-related-engineer.md",
+    "destination": "website/blog/2025-01-21-engineer-core-competitiveness-in-ai-era.md",
+    "original_title": "当 AI 能写代码，工程师的核心竞争力是什么？",
+    "english_slug": "engineer-core-competitiveness-in-ai-era",
+    "date": "2025-01-21",
+    "tags": [
+      "ai",
+      "architecture",
+      "career",
+      "engineering"
+    ]
+  },
+  {
+    "source": "2025/05. 我眼中的优秀工程师特质/to-be-better-engineer.md",
+    "destination": "website/blog/2025-01-23-qualities-of-excellent-engineers.md",
+    "original_title": "我眼中的优秀工程师特质",
+    "english_slug": "qualities-of-excellent-engineers",
+    "date": "2025-01-23",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "career",
+      "engineering"
+    ]
+  },
+  {
+    "source": "2025/06. 一行之差：为什么你的文件末尾应该留一个空行？/newline-at-eof.md",
+    "destination": "website/blog/2025-01-25-why-end-files-with-newline.md",
+    "original_title": "一行之差：为什么你的文件末尾应该留一个空行？",
+    "english_slug": "why-end-files-with-newline",
+    "date": "2025-01-25",
+    "tags": [
+      "ai",
+      "best-practices",
+      "engineering",
+      "go"
+    ]
+  },
+  {
+    "source": "2025/07.从类型系统看XGo编译器的实现/typesystem_xgo.md",
+    "destination": "website/blog/2025-01-27-type-system-understanding-xgo-compiler-implementation.md",
+    "original_title": "从类型系统理解 XGo 编译器的实现",
+    "english_slug": "type-system-understanding-xgo-compiler-implementation",
+    "date": "2025-01-27",
+    "tags": [
+      "ai",
+      "architecture",
+      "career",
+      "compiler",
+      "engineering",
+      "go",
+      "llgo",
+      "xgo"
+    ]
+  },
+  {
+    "source": "2025/08. AI辅助开发新范式：1024实训营带你探索未来/AI-assisted-dev.md",
+    "destination": "website/blog/2025-01-29-ai.md",
+    "original_title": "AI 重构软件开发：从工具到规则的范式革命",
+    "english_slug": "ai",
+    "date": "2025-01-29",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "career",
+      "engineering"
+    ]
+  },
+  {
+    "source": "2025/09. 许式伟聊AI时代下的工程师发展观/content.md",
+    "destination": "website/blog/2025-01-31-on-ai-era-engineer-development-perspective.md",
+    "original_title": "许式伟聊 AI 时代下的工程师发展观",
+    "english_slug": "on-ai-era-engineer-development-perspective",
+    "date": "2025-01-31",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "career",
+      "engineering",
+      "tutorial"
+    ]
+  },
+  {
+    "source": "2025/10. xgo发布/content.md",
+    "destination": "website/blog/2025-02-02-xu-shiwei-releases-xgo-roadmap-programming-for-all-in-ai-era.md",
+    "original_title": "许式伟发布 XGo 全景图：AI 时代的全民编程语言",
+    "english_slug": "xu-shiwei-releases-xgo-roadmap-programming-for-all-in-ai-era",
+    "date": "2025-02-02",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "career",
+      "compiler",
+      "engineering",
+      "go",
+      "llgo",
+      "python",
+      "xgo"
+    ]
+  },
+  {
+    "source": "2025/11. GitHub PR 合并三选一：主分支该怎么选？/github-pr-merge.md",
+    "destination": "website/blog/2025-02-04-github-pr-merge-strategies-which-to-choose.md",
+    "original_title": "GitHub PR 合并三选一：主分支该怎么选？",
+    "english_slug": "github-pr-merge-strategies-which-to-choose",
+    "date": "2025-02-04",
+    "tags": [
+      "ai",
+      "architecture",
+      "engineering",
+      "tutorial"
+    ]
+  },
+  {
+    "source": "2025/13.从类型系统理解 LLGo 编译器的实现/typesystem_llgo.md",
+    "destination": "website/blog/2025-02-08-understanding-llgo-compiler-through-type-system.md",
+    "original_title": "从类型系统理解 LLGo 编译器的实现",
+    "english_slug": "understanding-llgo-compiler-through-type-system",
+    "date": "2025-02-08",
+    "tags": [
+      "architecture",
+      "career",
+      "compiler",
+      "engineering",
+      "go",
+      "llgo",
+      "python"
+    ]
+  },
+  {
+    "source": "2025/14. Code Review 不是什么/what-code-review-is-not.md",
+    "destination": "website/blog/2025-02-10-code-review-what-is-not.md",
+    "original_title": "Code Review 不是什么",
+    "english_slug": "code-review-what-is-not",
+    "date": "2025-02-10",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "career",
+      "engineering"
+    ]
+  },
+  {
+    "source": "2025/15. 架构设计从何入手/content.md",
+    "destination": "website/blog/2025-02-12-architecture-design-where-to-start.md",
+    "original_title": "架构设计该从何入手",
+    "english_slug": "architecture-design-where-to-start",
+    "date": "2025-02-12",
+    "tags": [
+      "architecture",
+      "engineering"
+    ]
+  },
+  {
+    "source": "2025/16. 关于架构设计的几点认知体会/content.md",
+    "destination": "website/blog/2025-02-14-insights-on-architecture-design.md",
+    "original_title": "关于架构设计的几点认知体会",
+    "english_slug": "insights-on-architecture-design",
+    "date": "2025-02-14",
+    "tags": [
+      "ai",
+      "architecture",
+      "career",
+      "compiler",
+      "engineering",
+      "go",
+      "xgo"
+    ]
+  },
+  {
+    "source": "2025/17. SPX-Algorithm：构建多模态搜索服务的一些心得/share.md",
+    "destination": "website/blog/2025-02-16-spx-algorithm-building-multimodal-search-service.md",
+    "original_title": "SPX-Algorithm：构建多模态搜索服务的一些心得",
+    "english_slug": "spx-algorithm-building-multimodal-search-service",
+    "date": "2025-02-16",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "engineering",
+      "go"
+    ]
+  },
+  {
+    "source": "2025/18. 代码不是核心：从 XLink 项目看产品开发的决策层次/content.md",
+    "destination": "website/blog/2025-02-18-code-is-not-core-decision-layers-in-xlink-project.md",
+    "original_title": "代码不是核心：从 XLink 项目看产品开发的决策层次",
+    "english_slug": "code-is-not-core-decision-layers-in-xlink-project",
+    "date": "2025-02-18",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "career",
+      "engineering",
+      "go"
+    ]
+  },
+  {
+    "source": "2025/19. llpyg: LLGo 快速集成 Python 生态的桥梁/content.md",
+    "destination": "website/blog/2025-02-20-llpyg-bridge-for-llgo-python-integration.md",
+    "original_title": "llpyg: LLGo 快速集成 Python 生态的桥梁",
+    "english_slug": "llpyg-bridge-for-llgo-python-integration",
+    "date": "2025-02-20",
+    "tags": [
+      "ai",
+      "career",
+      "compiler",
+      "engineering",
+      "go",
+      "llgo",
+      "python"
+    ]
+  },
+  {
+    "source": "2025/21. 实训营分享：LLGo 中 Python 编译与运行时集成/content.md",
+    "destination": "website/blog/2025-02-28-llgo-python-compilation-and-runtime-integration.md",
+    "original_title": "LLGo 中 Python 编译与运行时集成：从依赖识别到一键交付",
+    "english_slug": "llgo-python-compilation-and-runtime-integration",
+    "date": "2025-02-28",
+    "tags": [
+      "architecture",
+      "compiler",
+      "engineering",
+      "go",
+      "llgo",
+      "python"
+    ]
+  },
+  {
+    "source": "2025/22.许式伟：AI时代重塑软件工程/reinventing_software_engineering_in_the_AI_Era.md",
+    "destination": "website/blog/2025-03-02-ai-era.md",
+    "original_title": "许式伟：AI 时代重塑软件工程",
+    "english_slug": "ai-era",
+    "date": "2025-03-02",
+    "tags": [
+      "ai",
+      "architecture",
+      "best-practices",
+      "compiler",
+      "engineering",
+      "go",
+      "xgo"
+    ]
+  }
+]

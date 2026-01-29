@@ -1,10 +1,10 @@
 ---
-slug: 许式伟聊-ai-时代下的工程师发展观
+slug: /blog/2025/on-ai-era-engineer-development-perspective
 title: "许式伟聊 AI 时代下的工程师发展观"
 authors: [techcamp]
-tags: [ai, architecture, career, engineering]
+tags: [ai, architecture, best-practices, career, engineering, tutorial]
 date: 2025-01-31
-description: "探讨AI编程工具爆发后,工程师的真正价值和未来发展方向。"
+description: "这个问题从大模型爆发以来，一直是程序员圈子里讨论得沸沸扬扬的热门话题。Cursor、Claude Code、Kiro 等 AI 编程工具的出现，让写代码这件事变得前所未有的简单。面对这样的\"威胁\"，不少工程师开始焦虑：我们是不是要被淘汰了？"
 ---
 
 "AI 是否在消灭工程师？"
@@ -49,7 +49,7 @@ description: "探讨AI编程工具爆发后,工程师的真正价值和未来发
 
 许式伟提出了一个很有意思的模型——人的能力象限，包括四个维度：
 
-![人的能力象限图](/img/blog/许式伟聊-ai-时代下的工程师发展观/image.png)
+![人的能力象限图](/img/blog/on-ai-era-engineer-development-perspective/image.png)
 
 在这个模型中，工程和设计是基础能力，而商业和心性则是让工程师走得更远的关键。为什么要在这四个维度发展？因为真正想成事的人往往都需要这些综合能力——不仅要能解决工程问题，还要能理解商业需求，更要能在复杂环境中保持定力。在过去，每个维度要想做好，都需要花费大量的精力。而现在 AI 的出现，恰恰能帮助我们更好地发展这些能力，让工程师能够更专注于决策和创造。所以说 AI 其实是工程师成长的加速器，我们应该更加主动地拥抱 AI。
 
