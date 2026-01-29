@@ -1,10 +1,15 @@
 ---
 slug: engineer-core-competitiveness-in-ai-era
-title: "当 AI 能写代码，工程师的核心竞争力是什么？"
-authors: [techcamp]
-tags: [ai, architecture, career, engineering]
+title: 当 AI 能写代码，工程师的核心竞争力是什么？
+authors:
+- techcamp
+tags:
+- ai
+- architecture
+- career
+- engineering
 date: 2025-01-21
-description: "Programming is changing so fast。"
+description: Programming is changing so fast。
 ---
 
 Programming is changing so fast。
