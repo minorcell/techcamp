@@ -29,7 +29,7 @@
 5. **Mini Claude Code 设计** — 拆解 Claude Code，引入 Vercel AI SDK
 6. **工程经验** — 上下文管理、安全防护、系统提示词架构
 
-完整教案：[Issue #2](https://github.com/minorcell/mini-claude-code/issues/2)
+完整教案：[Issue #2](https://github.com/qiniu/techcamp/issues/70)
 
 ## 项目结构
 
@@ -88,6 +88,6 @@ bun src/index.ts
 
 ## 相关链接
 
-- [完整教案 Issue #2](https://github.com/minorcell/mini-claude-code/issues/2)
-- [Vercel AI SDK 最小用法 Issue #3](https://github.com/minorcell/mini-claude-code/issues/3)
+- [完整教案 Issue #70](https://github.com/qiniu/techcamp/issues/70)
+- [Vercel AI SDK 最小用法 Issue #71](https://github.com/qiniu/techcamp/issues/71)
 - [Mini Claude Code 设计文档](./projects/mini-claude-code/docs)

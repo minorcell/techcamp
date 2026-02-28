@@ -1,6 +1,6 @@
 {
   "name": "demo-agent",
-  "module": "index.ts",
+  "module": "main.ts",
   "type": "module",
   "private": true,
   "devDependencies": {
