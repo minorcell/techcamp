@@ -94,7 +94,7 @@ bun start
 
 **上下文压缩**
 
-每轮对话结束后，根据 SDK 返回的真实 `promptTokens` 判断上下文用量。超过上下文窗口 80% 时，自动压缩历史消息，保留系统提示词和最近几轮对话，重建 `messages` 数组。
+每轮对话结束后，根据 SDK 返回的真实 `promptTokens` 判断上下文用量。超过上下文窗口 80% 时，自动压缩历史消息，将摘要注入 `runtimeHints`，并清空历史消息以继续后续对话。
 
 **`compatibility: "compatible"` 的作用**
 

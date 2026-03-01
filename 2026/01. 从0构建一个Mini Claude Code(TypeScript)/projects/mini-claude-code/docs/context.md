@@ -2,216 +2,133 @@
 
 ## 问题背景
 
-ReAct 循环的每一步都会往 `history` 里追加消息：LLM 的思考、工具调用、工具结果……任务越复杂，history 越长，迟早触碰模型的上下文长度上限。
+ReAct 循环会持续把消息追加到 `history`：用户输入、模型中间步骤、工具调用与工具结果。任务越长，上下文越大，最终会逼近模型窗口上限。
 
-更糟糕的是：**上下文变长不只是会报错，还会让模型开始"遗忘"**——太长的上下文里，早期的关键信息会被"稀释"，模型的表现会下降。
+`mini-claude-code` 当前实现采用：
 
-`mini-claude-code` 的上下文管理策略：**计数 → 预警 → 压缩 → 重建**。
+**真实 token 计数 → 阈值判断 → 历史压缩 → 会话提示重建**
 
-## Token 计数
+## 计数来源：SDK usage.promptTokens
 
-精确的 token 计数需要分词器，成本高且与模型绑定。教学场景下，用字符数近似：
-
-```typescript
-// utils/token.ts
-
-// 中英文混合，平均每 token 约 2-3 个字符，这里用 2.5 近似
-const CHARS_PER_TOKEN = 2.5
-
-export function estimateTokens(text: string): number {
-  return Math.ceil(text.length / CHARS_PER_TOKEN)
-}
-
-export function estimateMessagesTokens(messages: CoreMessage[]): number {
-  return messages.reduce((total, msg) => {
-    const content = typeof msg.content === 'string'
-      ? msg.content
-      : JSON.stringify(msg.content)  // tool_call / tool_result 是对象
-    return total + estimateTokens(content)
-  }, 0)
-}
-```
-
-## 阈值设计
+当前代码不做字符估算，而是直接使用 Vercel AI SDK 返回的真实统计值：
 
 ```typescript
-// agent/context.ts
-
-// 主流模型上下文长度（以 128k 为例）
-const MODEL_CONTEXT_LIMIT = 128_000   // tokens
-
-// 80% 时触发压缩：留 20% 给 LLM 输出和本轮工具结果
+// src/agent/context.ts
+const MODEL_CONTEXT_LIMIT = 128_000
 const COMPRESS_THRESHOLD = 0.8
 
-// 系统提示词占用（静态部分）
-const SYSTEM_PROMPT_RESERVE = 2_000
-
-export function shouldCompress(
-  history: CoreMessage[],
-  systemPrompt: string
-): boolean {
-  const historyTokens = estimateMessagesTokens(history)
-  const systemTokens = estimateTokens(systemPrompt)
-  const totalUsed = historyTokens + systemTokens
-
-  return totalUsed > MODEL_CONTEXT_LIMIT * COMPRESS_THRESHOLD
+export function shouldCompress(promptTokens: number): boolean {
+  return promptTokens > MODEL_CONTEXT_LIMIT * COMPRESS_THRESHOLD
 }
 ```
 
-## 压缩流程
+即：当 `promptTokens > 102400` 时触发压缩。
 
-触发压缩后，执行以下步骤：
+## 触发时机
 
-```
-当前 history（很长）
-        │
-        ▼
-  让 LLM 生成摘要
-        │
-        ▼
-  摘要包含 4 部分：
-    1. 已完成的任务
-    2. 尚未完成的任务
-    3. 当前状态（修改了哪些文件、关键发现）
-    4. 注意事项（踩过的坑、边界条件）
-        │
-        ▼
-  重建 history：
-    [system] 原系统提示词 + 压缩摘要 hint
-    [user]   原始用户问题（保留）
-        │
-        ▼
-  继续执行 AgentLoop
-```
-
-### 压缩提示词
+触发点在 `src/index.ts` 的“每轮结束后”：
 
 ```typescript
-// agent/context.ts
+const { text, responseMessages, usage } = await agentLoop(...)
 
-const COMPRESS_PROMPT = `
-请对以下 Agent 执行历史进行压缩总结，输出格式如下（使用 XML 标签）：
+history.push({ role: 'user', content: question })
+history.push(...responseMessages)
 
-<completed>
-已完成的具体操作列表（每行一条）
-</completed>
+if (shouldCompress(usage.promptTokens)) {
+  const summary = await compressHistory(history)
+  const hint = buildCompressionHint(summary)
+  history = []
+  runtimeHints = [hint]
+}
+```
 
-<remaining>
-还未完成的任务或子任务
-</remaining>
+注意：
+- 不是“每步 onStepFinish 检查”
+- 也不会中断 `generateText` 后递归重跑
+- 是在本轮完成后再决定是否压缩
 
-<current_state>
-当前状态：已修改的文件、关键变量值、环境状态等
-</current_state>
+## 压缩实现
 
-<notes>
-重要注意事项：踩过的坑、特殊处理、边界条件
-</notes>
+`src/agent/context.ts` 会把完整历史拼成文本，让模型生成结构化摘要：
 
-要求：
-- 信息密度高，不要废话
-- 保留所有对后续执行有用的细节
-- 忘记所有已经完成且不影响后续的步骤细节
+```typescript
+const COMPRESS_SYSTEM = `
+你是一个 Agent 执行历史压缩器。将以下执行历史总结为结构化摘要，输出格式如下（使用 XML 标签）：
+
+<completed>...</completed>
+<remaining>...</remaining>
+<current_state>...</current_state>
+<notes>...</notes>
 `.trim()
-```
 
-### 压缩实现
-
-```typescript
-export async function compressHistory(
-  history: CoreMessage[],
-  model: LanguageModelV1
-): Promise<string> {
-  // 把完整 history 拼成文本交给 LLM 总结
+export async function compressHistory(history: CoreMessage[]): Promise<string> {
   const historyText = history
-    .map(m => {
-      const content = typeof m.content === 'string'
-        ? m.content
-        : JSON.stringify(m.content)
+    .map((m) => {
+      const content = typeof m.content === 'string' ? m.content : JSON.stringify(m.content)
       return `[${m.role}]\n${content}`
     })
     .join('\n\n---\n\n')
 
   const { text } = await generateText({
     model,
-    system: COMPRESS_PROMPT,
+    system: COMPRESS_SYSTEM,
     prompt: historyText,
-    maxSteps: 1,  // 只要一次输出，不循环
+    maxSteps: 1,
   })
 
   return text
 }
 ```
 
-## 重建会话
+## 会话重建方式
 
-压缩完成后，用摘要重建 history：
+压缩后不保留旧 `history`，而是：
+
+1. 清空历史：`history = []`
+2. 生成运行时提示：`buildCompressionHint(summary)`
+3. 把提示写入 `runtimeHints`
+
+`agentLoop` 下轮调用时会把 `runtimeHints` 注入系统提示词（见 `src/agent/prompt.ts`）。
 
 ```typescript
-export async function rebuildHistory(
-  originalQuestion: string,
-  summary: string,
-  systemPrompt: string,
-  model: LanguageModelV1,
-): Promise<{ history: CoreMessage[], newSystem: string }> {
-
-  // 将摘要注入系统提示词（作为运行时状态段）
-  const summaryHint = `
-[执行历史摘要 - 之前会话已压缩]
-
-${summary}
-
-注意：以上是对之前执行历史的摘要，你当前处于重建会话的状态。
-请基于上述摘要继续完成原始任务，不要重复已完成的操作。`.trim()
-
-  const newSystem = await assembleSystemPrompt([summaryHint])
-
-  // 重建 history：只保留原始问题
-  const history: CoreMessage[] = [
-    { role: 'user', content: originalQuestion },
-  ]
-
-  return { history, newSystem }
+export function buildCompressionHint(summary: string): string {
+  return [
+    '[执行历史摘要 - 之前会话已压缩]',
+    '',
+    summary,
+    '',
+    '注意：以上是对之前执行历史的摘要，你处于重建会话状态。',
+    '请基于摘要继续完成原始任务，不要重复已完成的操作。',
+  ].join('\n')
 }
 ```
 
-## 完整流程图
+## 流程图
 
-```
-AgentLoop.run(question)
+```text
+本轮用户输入
     │
-    ├── [每步 onStepFinish]
-    │       │
-    │       ▼
-    │   shouldCompress(history) ?
-    │       │
-    │    是 │                    否
-    │       ▼                    ▼
-    │   throw ContextOverflow   继续
+    ▼
+agentLoop(question, history, runtimeHints)
     │
-    ├── [捕获 ContextOverflow]
-    │       │
-    │       ▼
-    │   summary = compressHistory(history, model)
-    │       │
-    │       ▼
-    │   { history, newSystem } = rebuildHistory(question, summary)
-    │       │
-    │       ▼
-    │   AgentLoop.run(question, { history, system: newSystem })
-    │   （递归，直到任务完成）
+    ▼
+返回 { text, responseMessages, usage.promptTokens }
     │
-    └── 返回最终文本
+    ├── 追加到 history
+    │
+    └── shouldCompress(promptTokens) ?
+            │
+         是 │
+            ▼
+      compressHistory(history)
+            │
+            ▼
+      runtimeHints = [buildCompressionHint(summary)]
+      history = []
 ```
 
-## 工具输出是最大的上下文"杀手"
+## 与工具截断的关系
 
-上下文暴涨通常不是用户消息造成的，而是工具输出——一次 `read_file` 读取大文件，一次 `bash` 输出大量日志，瞬间消耗数千 token。
+工具输出截断（`utils/truncate.ts`）是第一道防线，尽量减少单次输出造成的 token 峰值；历史压缩是第二道防线，处理长任务累积上下文。
 
-所以**工具输出截断**（见 [tools.md](./tools.md)）是上下文管理的第一道防线，压缩机制是第二道防线。两道防线配合，才能支撑长时间运行的任务。
-
-## 教学提示
-
-对于简单任务（几步就完成的），这套机制完全不会触发——上下文几千 token 远未到阈值。
-
-它的价值在"长任务"场景：让 Agent 调试一个复杂的 Bug、重构一个模块、写一整套测试……这时上下文管理的存在与否，决定了 Agent 能不能坚持到终点。
+两者配合，才能在真实的多步任务里保持会话可持续。
